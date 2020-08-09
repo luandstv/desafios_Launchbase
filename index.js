@@ -1,81 +1,84 @@
-// programa para calcular media dos alunos
-// parabenizar a turma caso a media das notas for maior que 5
-
-
-
-// const al01 = 'luan'
-// const notaAl01 = 10
-
-// const al02 = 'jorge'
-// const notaAl02 = 7
-
-// const al03 = 'joao'
-// const notaAl03 = 9
-
-
-
-
-const alunosturmaA = [
+const classA = [
   {
-    nome: "luan",
-    nota: 10
+    name: "luan",
+    grade: 10
   },
   {
-    nome:"diego",
-    nota: 10
+    name: "diego",
+    grade: 10
   },
   {
-    nome:"michel",
-    nota: 10
+    name: "michel",
+    grade: 7
   },
   {
-    nome:"luis",
-    nota: 4.5
+    name: "luis",
+    grade: 4.5
   }
 ]
 
-const alunosturmaB = [
+const classB = [
   {
-    nome: "jorge",
-    nota: 10
+    name: "jorge",
+    grade: 8
   },
   {
-    nome:"zezinho",
-    nota: 10
+    name: "zezinho",
+    grade: 5
   },
   {
-    nome:"lucas",
-    nota: 10
+    name: "lucas",
+    grade: 6
   }
 ]
 
-  // função de calcular a media dos alunos
-function calculaMedia(alunos){
-    let soma = 0;
-    for ( let i = 0; i < alunos.length; i++){      
-        soma = soma + alunos[i].nota      
-        
-    }
-      const media = soma / alunos.length
-      return media
-    
+function calculateAverage(stundents) {
+  let sum = 0
+
+  for (let i = 0; i < stundents.length; i++) {
+    sum = sum + stundents[i].grade
+  }
+
+  const avarage = sum / stundents.length
+
+  return avarage
+
 }
 
-
-   // função de calculo de media onde pega os dados de determinada turma e aplica na função
- const media1 = calculaMedia(alunosturmaA)
- const media2 = calculaMedia(alunosturmaB)
-
-function enviarmensagem (media, turma){
-  if( media >= 5 ){
-    console.log(`A media da turma ${turma} foi de ${media}, Parabens!`)
-  } else{
-    console.log(`A media da turma ${turma} foi abaixo do esperado.`)
+function sandMessage(avarage, turma) {
+  if (avarage >= 5) {
+    console.log(` ${turma} average: ${avarage.toFixed(2)}. Congrats!`)
+  } else {
+    console.log(`${turma} average: ${avarage.toFixed(2)}. Is not good`)
   }
 }
 
-enviarmensagem(media1, 'A')
-enviarmensagem(media2, 'B')
+function markAsFlunked(stundent) {
+  stundent.flunked = false;
+  if (stundent.grade < 5) {
+    stundent.flunked = true;
+  }
 
+}
 
+function sandMessageflunked(stundent) {
+  if (stundent.flunked) {
+    console.log(`Stundent ${stundent.name} flunked! grade: ${stundent.grade}`)
+  }
+}
 
+function stundentsflunkeds(stundents) {
+  for (let stundent of stundents) {
+    markAsFlunked(stundent)
+    sandMessageflunked(stundent)
+  }
+}
+
+const avarage1 = calculateAverage(classA)
+const avarage2 = calculateAverage(classB)
+
+sandMessage(avarage1, 'Class A')
+sandMessage(avarage2, 'Class B')
+
+stundentsflunkeds(classA)
+stundentsflunkeds(classB)
